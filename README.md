@@ -27,56 +27,52 @@ The SDK contains Simple client(authrozied by appcode) and Normal client(authrozi
 ### Simple client
 
 ```js
-// require it
-var SimpleClient = require('aliyun-api-gateway').SimpleClient;
+'use strict';
+// npm install aliyun-api-gateway --save
 
-// create client instance with appcode
-var client = new SimpleClient('appcode');
+const co = require('co');
+const Client = require('aliyun-api-gateway').SimpleClient;
+const client = new Client('YOUR_APP_CODE');
 
-// send GET request
-it('should ok get(url)', function* () {
-  var url = 'https://dm-81.data.aliyun.com/rest/160601/ip/getIpInfo.json?ip=210.75.225.254';
-  var result = yield client.get(url);
-});
+co(function* () {
+  var url = 'http://apiqingdaohttps.foundai.com/test1234';
 
-it('should ok with post(url)', function* () {
-  var url = 'https://dm-72.data.aliyun.com/rest/160601/int_image/matching.json';
   var result = yield client.post(url, {
     data: {
-      'image': {
-        'dataType': 10,
-        'dataValue': 'base64 content'
-      }
+      'testtest': 'query1Value'
+    },
+    headers: {
+      accept: 'application/json'
     }
   });
+
+  console.log(JSON.stringify(result));
 });
+
 ```
 
 ### Client (recommend)
 
 ```js
-// require it
-var Client = require('aliyun-api-gateway').Client;
+'use strict';
+// npm install aliyun-api-gateway --save
+const co = require('co');
+const Client = require('aliyun-api-gateway').Client;
+const client = new Client('YOUR_APP_CODE', 'YOUR_APP_SECRET');
 
-// create client instance with appkey and appsecret
-var client = new Client('appKey', 'appSecret');
+co(function* () {
+  var url = 'http://apiqingdaohttps.foundai.com/test1234';
 
-// send GET request
-it('should ok get(url)', function* () {
-  var url = 'https://dm-81.data.aliyun.com/rest/160601/ip/getIpInfo.json?ip=210.75.225.254';
-  var result = yield client.get(url);
-});
-
-it('should ok with post(url)', function* () {
-  var url = 'https://dm-72.data.aliyun.com/rest/160601/int_image/matching.json';
   var result = yield client.post(url, {
     data: {
-      'image': {
-        'dataType': 10,
-        'dataValue': 'base64 content'
-      }
+      'testtest': 'query1Value'
+    },
+    headers: {
+      accept: 'application/json'
     }
   });
+
+  console.log(JSON.stringify(result));
 });
 ```
 
